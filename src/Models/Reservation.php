@@ -284,7 +284,7 @@ class Reservation extends Model
             ->flatten()
             ->keyBy('id');
     }
-
+  
     public static function listCalendarEvents($startAt, $endAt, $locationId = null)
     {
         $query = self::query()->whereBetween('reserve_date', [
@@ -358,6 +358,14 @@ class Reservation extends Model
 
         return DiningTable::query()->whereHasLocation($location)->pluck('name', 'id');
     }
+
+    public function registerFormWidgets()
+    {
+        return [
+            'Author\Extension\FormWidgets\MyFormWidget' => 'myformwidget',
+        ];
+    }
+
 
     /**
      * Return the dates of all reservations
